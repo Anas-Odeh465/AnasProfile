@@ -38,7 +38,7 @@ function createTransporter() {
   const pass = process.env.GMAIL_APP_PASSWORD;
 
   if (!user || !pass) {
-    throw new Error('Missing Gmail credentials. Set GMAIL_USER and GMAIL_APP_PASSWORD in your environment.');
+    throw new Error('Missing Gmail credentials in your environment.');
   }
 
   return nodemailer.createTransport({
