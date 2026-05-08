@@ -88,8 +88,6 @@ app.post('/api/contact', async (req, res) => {
   try {
     const transporter = createTransporter();
 
-    await transporter.verify();
-
     await transporter.sendMail({
       from: `"Anas Portfolio Contact" <${process.env.GMAIL_USER}>`,
       to: 'anas.odeh.per@gmail.com',
