@@ -77,6 +77,6 @@ export const projects = [
 
 export const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/Anas-Odeh465', icon: GithubIcon },
-  { label: 'LinkedIn', href: 'https://linkedin.com/', icon: LinkedInIcon },
-  { label: 'X', href: 'https://x.com/', icon: XIcon },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/anas-odeh-946b10288/', icon: LinkedInIcon },
+  { label: 'X', href: 'https://x.com/AnasOdeh252', icon: XIcon },
 ];
