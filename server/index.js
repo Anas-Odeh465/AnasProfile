@@ -4,8 +4,6 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 dotenv.config();
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const anasEmail = process.env.GMAIL_USER;
 const port = process.env.PORT;
 const app = express();
 
