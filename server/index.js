@@ -1,9 +1,8 @@
+import nodemailer from 'nodemailer';
 import express from 'express';
-import cors from 'cors';
 import dotenv from 'dotenv';
-import { Resend } from 'resend';
+import cors from 'cors';
 dotenv.config();
-
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const anasEmail = process.env.GMAIL_USER;
@@ -17,6 +16,16 @@ app.use(cors(
 ));
 
 app.use(express.json());
+
+const transporter = nodemailer.createTransport({
+    host: process.env.MAIL_HOST,
+    port: process.env.MAIL_PORT,
+    secure: process.env.MAIL_SECURE,
+    auth:{
+      user: process.env.AUTH_MAIL,
+      pass: process.env.AUTH_PASS
+    }
+});
 
 function validateContactPayload({ name, email, message }) {
   if (!name || !email || !message) {
@@ -56,17 +65,15 @@ app.post('/api/contact', async (req, res) => {
   }
 
   try {
-    await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: anasEmail,
-
-      subject: `New portfolio message from ${name}`,
-
-      replyTo: email,
-
+    await transporter.sendMail({
+      from: email,
+      to: process.env.AUTH_MAIL,
+      subject: `🔥 New Message Sent from Anas Portfolio Contact`,
       html: `
-        <div style="font-family: Arial, sans-serif;">
-          <h2>New Contact Message</h2>
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
+          <h2 style="margin-bottom: 16px;">
+            New portfolio contact message
+          </h2>
 
           <p>
             <strong>Name:</strong> ${name}
@@ -80,7 +87,9 @@ app.post('/api/contact', async (req, res) => {
             <strong>Message:</strong>
           </p>
 
-          <p>${message}</p>
+          <p style="white-space: pre-line;">
+            ${message}
+          </p>
         </div>
       `,
     });

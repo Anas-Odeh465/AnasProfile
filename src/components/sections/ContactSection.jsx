@@ -141,7 +141,7 @@ function ContactSection({ email }) {
                 {status === 'loading' ? 'Sending...' : 'Send Message'}
               </Button>
               <p className="text-sm text-neutral-500 dark:text-neutral-400" aria-live="polite">
-                {feedback || 'Your message will be sent directly to my inbox through the backend email service.'}
+                {feedback || 'Your message will be sent directly to my inbox through.'}
               </p>
             </div>
           </form>
