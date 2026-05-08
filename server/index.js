@@ -1,5 +1,3 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -7,34 +5,15 @@ import nodemailer from 'nodemailer';
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const rootDir = path.resolve(__dirname, '..');
-const distDir = path.join(rootDir, 'dist');
-
 const app = express();
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT;
 
-const allowedOrigins = (
-  process.env.CLIENT_ORIGIN || 'http://localhost:5173'
-)
-  .split(',')
-  .map((origin) => origin.trim())
-  .filter(Boolean);
-
-app.use(
-  cors({
-    origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error('Not allowed by CORS'));
-    },
-  }),
-);
+app.use(cors(
+  {
+    origin: [process.env.CLIENT_ORIGIN], 
+  },
+));
 
 app.use(express.json());
 
@@ -111,12 +90,10 @@ app.post('/api/contact', async (req, res) => {
 
       subject: `New portfolio message from ${name}`,
 
-      text: `
-Name: ${name}
-Email: ${email}
-
-Message:
-${message}
+      text: ` 
+        Name: ${name}        
+        Email: ${email}      
+        Message: ${message}
       `,
 
       html: `
@@ -156,14 +133,6 @@ ${message}
     });
   }
 });
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(distDir));
-
-  app.get('*', (_req, res) => {
-    res.sendFile(path.join(distDir, 'index.html'));
-  });
-}
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`Server listening on port ${port}`);
