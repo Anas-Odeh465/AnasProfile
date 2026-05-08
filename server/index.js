@@ -22,22 +22,29 @@ function createTransporter() {
   const pass = process.env.GMAIL_APP_PASSWORD;
 
   if (!user || !pass) {
-    throw new Error('Missing Gmail credentials in environment variables.');
+    throw new Error('Missing Gmail credentials.');
   }
 
   return nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false,
 
     auth: {
       user,
       pass,
     },
 
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000,
+    requireTLS: true,
+
+    tls: {
+      ciphers: 'SSLv3',
+      rejectUnauthorized: false,
+    },
+
+    connectionTimeout: 30000,
+    greetingTimeout: 30000,
+    socketTimeout: 30000,
   });
 }
 
