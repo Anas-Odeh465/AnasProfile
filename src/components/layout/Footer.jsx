@@ -2,7 +2,7 @@ function Footer({ socialLinks }) {
   return (
     <footer className="px-6 pb-8 pt-6 sm:px-8 lg:px-12">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 rounded-[28px] border border-neutral-200/70 bg-white/80 px-6 py-8 text-sm text-neutral-600 backdrop-blur-xl dark:border-white/10 dark:bg-white/5 dark:text-neutral-400 sm:flex-row">
-        <p>Built with React, Vite, and Tailwind CSS for a production-ready personal brand.</p>
+        <p>Built with React, Vite, and Tailwind CSS. © 2026 Anas Odeh</p>
         <div className="flex items-center gap-3">
           {socialLinks.map((link) => {
             const Icon = link.icon;
