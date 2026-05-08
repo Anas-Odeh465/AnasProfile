@@ -1,13 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import nodemailer from 'nodemailer';
-
+import { Resend } from 'resend';
 dotenv.config();
 
-const app = express();
 
+const resend = new Resend(process.env.RESEND_API_KEY);
+const anasEmail = process.env.GMAIL_USER;
 const port = process.env.PORT;
+const app = express();
 
 app.use(cors(
   {
@@ -16,37 +17,6 @@ app.use(cors(
 ));
 
 app.use(express.json());
-
-function createTransporter() {
-  const user = process.env.GMAIL_USER;
-  const pass = process.env.GMAIL_APP_PASSWORD;
-
-  if (!user || !pass) {
-    throw new Error('Missing Gmail credentials.');
-  }
-
-  return nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-
-    auth: {
-      user,
-      pass,
-    },
-
-    requireTLS: true,
-
-    tls: {
-      ciphers: 'SSLv3',
-      rejectUnauthorized: false,
-    },
-
-    connectionTimeout: 30000,
-    greetingTimeout: 30000,
-    socketTimeout: 30000,
-  });
-}
 
 function validateContactPayload({ name, email, message }) {
   if (!name || !email || !message) {
@@ -86,26 +56,17 @@ app.post('/api/contact', async (req, res) => {
   }
 
   try {
-    const transporter = createTransporter();
-
-    await transporter.sendMail({
-      from: `"Anas Portfolio Contact" <${process.env.GMAIL_USER}>`,
-      to: 'anas.odeh.per@gmail.com',
-      replyTo: email,
+    await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: anasEmail,
 
       subject: `New portfolio message from ${name}`,
 
-      text: ` 
-        Name: ${name}        
-        Email: ${email}      
-        Message: ${message}
-      `,
+      replyTo: email,
 
       html: `
-        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
-          <h2 style="margin-bottom: 16px;">
-            New portfolio contact message
-          </h2>
+        <div style="font-family: Arial, sans-serif;">
+          <h2>New Contact Message</h2>
 
           <p>
             <strong>Name:</strong> ${name}
@@ -119,9 +80,7 @@ app.post('/api/contact', async (req, res) => {
             <strong>Message:</strong>
           </p>
 
-          <p style="white-space: pre-line;">
-            ${message}
-          </p>
+          <p>${message}</p>
         </div>
       `,
     });
@@ -129,12 +88,12 @@ app.post('/api/contact', async (req, res) => {
     return res.status(200).json({
       message: 'Message sent successfully.',
     });
+
   } catch (error) {
-    console.error('Contact email error:', error);
+    console.error(error);
 
     return res.status(500).json({
-      message:
-        'The server could not send the email. Check your Gmail configuration.',
+      message: error.message,
     });
   }
 });
