@@ -64,9 +64,10 @@ app.post('/api/contact', async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: email,
+      from: `"${name}" <${email}>`,
       to: process.env.AUTH_MAIL,
-      subject: `🔥 New Message Sent from Anas Portfolio Contact`,
+      subject: `🔥 New Message from ${name}`,
+      text: message,
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
           <h2 style="margin-bottom: 16px;">
