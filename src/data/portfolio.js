@@ -28,7 +28,7 @@ export const profile = {
     { label: 'Contact Me', href: '#contact', variant: 'secondary' },
   ],
   stats: [
-    { value: '3+', label: 'Years of experience' },
+    { value: '3+', label: 'Years Learning & Building' },
     { value: '2', label: 'Projects deployed' },
     { value: '4', label: 'Projects in progress' },
   ],
