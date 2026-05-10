@@ -25,7 +25,7 @@ function HeroSection({ profile }) {
               Based in {profile.location}
             </span>
             <span className="rounded-full border border-neutral-200 bg-white/70 px-3 py-1.5 dark:border-white/10 dark:bg-white/5">
-              3+ Years Experience
+              3+ Years Learning & Building
             </span>
             <span className="rounded-full border border-neutral-200 bg-white/70 px-3 py-1.5 dark:border-white/10 dark:bg-white/5">
               Open to meaningful projects
