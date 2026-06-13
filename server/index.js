@@ -66,7 +66,7 @@
 //     await transporter.sendMail({
 //       from: `"${name}" <${email}>`,
 //       to: process.env.AUTH_MAIL,
-//       subject: `🔥 New Message from ${name}`,
+//       subject: `New Message from ${name}`,
 //       text: message,
 //       html: `
 //         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">

@@ -50,7 +50,7 @@ export const projects = [
     title: 'QuarkAi',
     description:
       'For quick use of Ai with API layer, and a smoother day-to-day workflow for decision making still under test and build.',
-    techStack: ['React', 'Node.js', 'Express', 'Vercel', 'Tailwind CSS', 'Render', '4 Years ago'],
+    techStack: ['React', 'Node.js', 'Express', 'Vercel', 'Tailwind CSS', 'Render', '2 Years ago'],
     image: '/QuarkAi.png',
     liveUrl: 'https://quark-ai-sage.vercel.app/QuarkAI',
     repoUrl: 'https://github.com/Anas-Odeh465/Quark-AI',
@@ -59,7 +59,7 @@ export const projects = [
     title: 'Naqel Team Script',
     description:
       'A responsive system experience designed to manage Excel files for customer service department and it easier for agents ',
-    techStack: ['React', 'REST API', 'Node.js', 'Vercel', 'Tailwind CSS', 'Render', 'Supabase', 'PostgerSQL', '3 Years ago'],
+    techStack: ['React', 'REST API', 'Node.js', 'Vercel', 'Tailwind CSS', 'Render', 'Supabase', 'PostgerSQL', '1 Years ago'],
     image: '/NTS.png',
     liveUrl: 'https://nts-back.vercel.app/',
     repoUrl: 'https://github.com/Anas-Odeh465/NTS-BACK',
