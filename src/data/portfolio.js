@@ -70,7 +70,7 @@ export const projects = [
       'An Ai platform focused on reducing manual work for teams through structured forms, role-based access, and better visibility into internal processes.',
     techStack: ['React', 'Tailwind CSS', 'Canvas', 'Vercel', 'I\'m currently working on it'],
     image: '/Xamxai.png',
-    liveUrl: 'https://xamx-ai.vercel.app/',
+    liveUrl: 'https://xamxai.com/',
     repoUrl: 'https://github.com/Anas-Odeh465/Xamx.Ai',
   },
 ];
